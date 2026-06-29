@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useStore, Project } from '../store/useStore';
-import { LogOut, Users, FileText, Plus, Edit, Trash2, Archive, Upload, UserCog, Download } from 'lucide-react';
+import { LogOut, Users, FileText, Plus, Edit, Trash2, Archive, Upload, UserCog, Download, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
 import Modal from '../components/Modal';
@@ -11,6 +11,7 @@ import DataTable from '../components/DataTable';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<'projects' | 'clients' | 'history' | 'admins'>('projects');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isClientModalOpen, setIsClientModalOpen] = useState(false);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
@@ -160,20 +161,21 @@ export default function AdminDashboard() {
 
   return (
     <div className="dashboard-layout">
-      <aside className="sidebar">
+      {isSidebarOpen && <div className="mobile-overlay" onClick={() => setIsSidebarOpen(false)} />}
+      <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <span className="epiroc-logo-text">EPIROC</span>
         </div>
         <nav className="sidebar-nav">
           <button 
             className={`nav-btn ${activeTab === 'projects' ? 'active' : ''}`}
-            onClick={() => setActiveTab('projects')}
+            onClick={() => { setActiveTab('projects'); setIsSidebarOpen(false); }}
           >
             <FileText size={18} /> Proyectos Activos
           </button>
           <button 
             className={`nav-btn ${activeTab === 'history' ? 'active' : ''}`}
-            onClick={() => setActiveTab('history')}
+            onClick={() => { setActiveTab('history'); setIsSidebarOpen(false); }}
           >
             <Archive size={18} /> Historial
           </button>
@@ -181,13 +183,13 @@ export default function AdminDashboard() {
             <>
               <button 
                 className={`nav-btn ${activeTab === 'clients' ? 'active' : ''}`}
-                onClick={() => setActiveTab('clients')}
+                onClick={() => { setActiveTab('clients'); setIsSidebarOpen(false); }}
               >
                 <Users size={18} /> Clientes
               </button>
               <button 
                 className={`nav-btn ${activeTab === 'admins' ? 'active' : ''}`}
-                onClick={() => setActiveTab('admins')}
+                onClick={() => { setActiveTab('admins'); setIsSidebarOpen(false); }}
               >
                 <UserCog size={18} /> Administradores
               </button>
@@ -204,13 +206,16 @@ export default function AdminDashboard() {
       <main className="main-content">
         <header className="content-header">
           <h1>
+            <button className="mobile-menu-btn" onClick={() => setIsSidebarOpen(true)}>
+              <Menu size={24} />
+            </button>
             {activeTab === 'projects' && 'Gestión de Proyectos Activos'}
             {activeTab === 'history' && 'Historial de Proyectos'}
             {activeTab === 'clients' && 'Gestión de Clientes'}
             {activeTab === 'admins' && 'Gestión de Administradores'}
           </h1>
           {activeTab === 'projects' && (
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <div className="header-actions">
               <button className="btn-secondary" onClick={handleExportExcel} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Download size={16} /> Exportar Excel
               </button>
@@ -230,7 +235,7 @@ export default function AdminDashboard() {
             </div>
           )}
           {activeTab === 'history' && (
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <div className="header-actions">
               <button className="btn-secondary" onClick={handleExportExcel} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Download size={16} /> Exportar Excel
               </button>
