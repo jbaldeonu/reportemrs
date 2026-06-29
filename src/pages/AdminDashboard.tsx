@@ -25,8 +25,7 @@ export default function AdminDashboard() {
   const admins = useStore((state) => state.admins);
   const addProject = useStore((state) => state.addProject);
   const deleteProject = useStore((state) => state.deleteProject);
-  const addClient = useStore((state) => state.addClient);
-  const updateClient = useStore((state) => state.updateClient);
+
   const deleteClient = useStore((state) => state.deleteClient);
   const deleteAdmin = useStore((state) => state.deleteAdmin);
   const navigate = useNavigate();

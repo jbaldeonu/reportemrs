@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Project } from '../store/useStore';
 import { differenceInDays, parseISO, isValid, format, isBefore, isAfter, startOfDay } from 'date-fns';
 

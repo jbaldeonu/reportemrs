@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 interface Props {
@@ -28,7 +28,7 @@ export default function PieChartStatus({ onTime, overdue }: Props) {
             dataKey="value"
             stroke="none"
           >
-            {data.map((entry, index) => (
+            {data.map((_entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
