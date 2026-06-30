@@ -771,8 +771,42 @@ body {
     padding: 1rem;
   }
 
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    padding: 0.75rem 0.25rem;
+    gap: 0.5rem;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .stat-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto;
+  }
+
+  .stat-icon-wrapper svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stat-info h3 {
+    font-size: 0.65rem;
+    line-height: 1.1;
+  }
+
   .stat-value {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .stat-card.chart-card {
+    grid-column: 1 / -1;
+    padding: 1rem;
   }
 }
 
