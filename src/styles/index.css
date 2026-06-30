@@ -367,7 +367,7 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-.stat-card.chart-card {
+.stat-card.legend-card {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
@@ -824,9 +824,11 @@ body {
     font-size: 1.1rem;
   }
 
-  .stat-card.chart-card {
+  .stat-card.legend-card {
     grid-column: 1 / -1;
     padding: 1rem;
+    text-align: left;
+    align-items: flex-start;
   }
 }
 

@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useStore, Project } from '../store/useStore';
 import { LogOut, Briefcase, Clock, AlertTriangle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import PieChartStatus from '../components/PieChartStatus';
 import DataTable from '../components/DataTable';
 import { parseISO, isBefore, startOfDay } from 'date-fns';
 
@@ -103,8 +102,22 @@ export default function ClientDashboard() {
                 <p className="stat-value">{stats.overdue}</p>
               </div>
             </div>
-            <div className="stat-card chart-card">
-               <PieChartStatus onTime={stats.onTime} overdue={stats.overdue} />
+            <div className="stat-card legend-card">
+              <h3 style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', fontWeight: 600, marginBottom: '0.25rem' }}>Leyenda (St)</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-primary)' }}>
+                  <div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#ef4444', boxShadow: '0 0 6px #ef4444', flexShrink: 0 }} /> Crítico (≤ 7 días)
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-primary)' }}>
+                  <div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#eab308', boxShadow: '0 0 6px #eab308', flexShrink: 0 }} /> Precaución (8-15 días)
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-primary)' }}>
+                  <div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#22c55e', boxShadow: '0 0 6px #22c55e', flexShrink: 0 }} /> A tiempo (&gt; 15 días)
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-primary)' }}>
+                  <div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#e2e8f0', flexShrink: 0 }} /> Sin fecha / Cerrado
+                </div>
+              </div>
             </div>
           </div>
 
